@@ -1,6 +1,6 @@
 <?php
 
-	require ('includes/config.php');
+	//require ('includes/config.php');
 	require ('includes/connect.php');
 
 	userRegistration();
@@ -33,14 +33,25 @@
 
 	    if (isset($_POST['submit_reg_btn'])) {
 			//a query for inserting POST array data into database table
-	    	$query= "INSERT INTO users (First_Name,Last_Name, Email, Username, Password) VALUES ('$first_name','$last_name', '$user_email', '$username', SHA('$password'))";
+	    	$query = "INSERT INTO users (First_Name,Last_Name,Email,Username,Password) VALUES ('$first_name','$last_name', '$user_email', '$username', SHA('$password'))";
+
+	    	$result = mysql_query($query);
+
+	    	$num = mysql_num_rows($result);
+
+	    	$i=0;
+	    	
+	    	while ($i < $num) {
+	    		//CODE$i++;
+	    	}
+
 	    	if (!$result) {
-				$unsucesss_url = 'http://' . $_SERVER['HTTP_HOST'] . dirname($_SERVER['PHP_SELF']) . '/includes/unsuccessful.php';
-				header('Location: ' . $unsucesss_url);
+				$unsucess_url = 'http://' . $_SERVER['HTTP_HOST'] . dirname($_SERVER['PHP_SELF']) . '/includes/unsuccessful.php';
+				header('Location: ' . $unsucess_url);
             }
             else {
-				$sucesss_url = 'http://' . $_SERVER['HTTP_HOST'] . dirname($_SERVER['PHP_SELF']) . '/includes/success.php';
-				header('Location: ' . $sucesss_url);
+				$sucess_url = 'http://' . $_SERVER['HTTP_HOST'] . dirname($_SERVER['PHP_SELF']) . '/includes/success.php';
+				header('Location: ' . $sucess_url);
 			}
                        
            //close database server connection
