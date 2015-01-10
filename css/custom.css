@@ -1,0 +1,112 @@
+body {
+    background-color: #394264;
+}
+
+p,label {
+    color: #ffffff;
+}
+
+/*Header*/
+.header-bar {
+    padding:10px 20px;
+    background-color: #cc324b;
+    margin-bottom: 20px;
+}
+
+.header-bar h3 {
+    color: #ffffff;
+    font-size: 20px;
+    margin-top:10px;
+}
+
+/*Buttons*/
+.btn-primary {
+    border: none;
+}
+
+/*Index Page*/
+.sign-up {
+    background-color: #11a8ab;
+}
+
+.sign-up:hover {
+    background-color: #ffffff;
+    color:#11a8ab;
+}
+
+.login {
+     background-color: #e64c65;
+}
+
+.login:hover {
+    background-color: #ffffff;
+    color: #e64c65;
+}
+
+.buttons-section {
+    text-align: center;
+}
+
+/*Registration Page*/
+.user-reg label{
+    color: #ffffff;
+}
+
+.user-reg .form-control,
+.user-login .form-control {
+    background-color: #50597b;
+    border:1px solid #1f253d;
+    color: #ffffff;
+}
+
+.user-reg .reg-btn {
+    background-color: #11a8ab;
+}
+
+.user-reg .reg-btn:hover {
+    background-color: #ffffff;
+    color: #11a8ab;
+}
+
+/*User Info*/
+.user-info {
+    margin-bottom: 10px;
+}
+
+.logout-btn {
+    float: left;
+    margin-left: 20px;
+}
+
+/*Tabs*/
+.nav-tabs {
+    clear: left;
+}
+
+#view {
+    display: none;
+}
+/*Map Styling*/
+/*Responsive*/
+.mapDiv {
+    position: relative;
+    padding-bottom: 56.25%;
+    padding-top: 30px;
+    height: 0;
+    overflow: hidden;
+}
+
+.mapDiv iframe,   
+.mapDiv object,  
+.mapDiv embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+#map-canvas {
+    height:250px;
+    width:100%;
+}

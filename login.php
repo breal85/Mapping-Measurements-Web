@@ -25,7 +25,7 @@
 
 	    if (isset($_POST['submit_login_btn'])) {
 			//a query for selecting login data from username table
-	    	$query = "SELECT Username, Password FROM users WHERE Username ='$user_name' AND Password = SHA('$password')";
+	    	$query = "SELECT uid, Username, Password FROM users WHERE Username ='$user_name' AND Password = SHA('$password')";
 	    	
 	    	if ($result = mysql_query($query)) {
 
@@ -34,12 +34,23 @@
 
 				if($num_rows == 1) {
 
-					//store username in session variables
+					//store username and ID session variables
+
 					$_SESSION["login_user"] = $user_name;
+
+					//fetch result from database
+					$row = mysql_fetch_array($result);
+					$_SESSION['uid'] = $row['uid'];
+                    setcookie('uid', $row['uid'], time() + (60 * 60 * 24 * 30));
 
 					//load login success message
 					//redirect to map measurements page
-					$map_url = 'http://' . $_SERVER['HTTP_HOST'] . dirname($_SERVER['PHP_SELF']) . '/map.php';
+					$map_url = 'http://' . $_SERVER['HTTP_HOST'] . dirname($_SERVER['PHP_SELF']) . '/measurements.php';
+					header('Location: ' . $map_url);
+				} else {
+					//load login unsuccessful message
+					//redirect to unsuccessful message page
+					$map_url = 'http://' . $_SERVER['HTTP_HOST'] . dirname($_SERVER['PHP_SELF']) . '/login_unsuccessful.php';
 					header('Location: ' . $map_url);
 				}
             }
@@ -51,41 +62,21 @@
 			mysql_close($connect);
     	}
 	}
-
+include('header.php');
 ?>
-<!DOCTYPE html>
-<html>
-	<head>
-		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-		<title>Login</title>
-	</head>
-	<body>
-		<header>
-			<div class="container-fluid">
-				<nav class="navbar navbar-default" role="navigation">
-					<div class="navbar-header">
-				 		<a>Login</a>
-				 	</div>
-				</nav>
-			</div>	
-		</header>
-		<div class="container-fluid">
-			<div class="row">
-				<div class="col-lg-12 col-xs-12">
-					<form name="user_registration" method="post" action="<?php echo htmlentities($_SERVER['PHP_SELF']);  ?>">
-						<div class="form-group">
-							<label for="user-name">User Name</label>
-    						<input name="user_name" type="text" class="form-control" id="first-name" placeholder="Enter User Name">
-						</div>
-						<div class="form-group">
-							<label for="password">Password</label>
-    						<input name="password" type="password" class="form-control" id="password" placeholder="Enter email">
-						</div>
-						<button name="submit_login_btn" type="submit" class="btn btn-primary">Login</button>
-						<a href="#">Forgot Password?</a>
-					</form>
-				</div>
+<div class="row">
+	<div class="col-lg-12 col-xs-12">
+		<form class="user-login" name="user_registration" method="post" action="<?php echo htmlentities($_SERVER['PHP_SELF']);  ?>">
+			<div class="form-group">
+				<label for="user-name">User Name</label>
+				<input name="user_name" type="text" class="form-control" id="first-name" placeholder="">
 			</div>
-		</div>
-	</body>
-</html>
+			<div class="form-group">
+				<label for="password">Password</label>
+				<input name="password" type="password" class="form-control" id="password" placeholder="">
+			</div>
+			<button name="submit_login_btn" type="submit" class="btn btn-primary">Login</button>
+		</form>
+	</div>
+</div>
+<?php include('footer.php');?>

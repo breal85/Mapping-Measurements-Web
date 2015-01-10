@@ -1,5 +1,4 @@
 <?php
-	
 	include('includes/connect.php');
 	session_start();// Starting Session
 	
@@ -13,8 +12,8 @@
 	
 	$login_session =$row['Username'];
 	
-	if(!isset($login_session)){
+	if(!isset($login_session)) {
 		mysql_close($connection); // Closing Connection
-		header('Location: index.php'); // Redirecting To Home Page
+		header('Location: login.php'); // Redirecting To Login Page
 	}
 ?>
