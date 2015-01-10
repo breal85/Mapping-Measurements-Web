@@ -2,6 +2,7 @@
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-lg-12 col-xs-12">
+				<h3>Registration</h3>
 				<form name="user_registration" method="post" action="user.php" class="user-reg">
 					<div class="form-group">
 						<label for="first-name">First Name</label>

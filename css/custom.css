@@ -2,7 +2,7 @@ body {
     background-color: #394264;
 }
 
-p,label {
+p,label,h1,h2,h3,h4,h5 {
     color: #ffffff;
 }
 
