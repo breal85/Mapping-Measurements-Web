@@ -13,6 +13,31 @@
 	</ul>';
 
 	//content - share
-	echo '<div id="share">';
-	echo "Can you see me?";
+	echo '<div id="view">';
+
+	 //a query for selecting data from ministry info table
+    $query = "SELECT ministry_info.mid, ministry_info.Description,category.CategoryName, ministry_info.Latitude, ministry_info.Longitude,users.First_Name, users.Last_Name FROM ministry_info, users, category WHERE ministry_info.category_cid = category.cid AND ministry_info.users_uid = users.uid";
+
+    //store query in a variable
+    $result = mysql_query($query);
+
+    if(!$result) {
+    	echo '<p>No Results!</p>';
+    } else {
+    	while($row = mysql_fetch_assoc($result)) {
+
+    		$userFname = $row['First_Name'];
+    		$userLname = $row['Last_Name'];
+    		$catMinistry =  $row['CategoryName'];
+    		$infoId =  $row['mid'];
+
+    		echo '<div class="list-group">
+			  <a href="list-item.php?mid='.$infoId.'" class="list-group-item">
+			    <h4 class="list-group-item-heading">'.$catMinistry.'</h4>
+			    <p class="list-group-item-text">'.$userFname.' '.$userLname.'</p>
+			  </a>
+			</div>';
+    	}
+    }
+	echo '</div>';
 	include('footer.php');

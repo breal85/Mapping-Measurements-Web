@@ -78,13 +78,14 @@ p,label,h1,h2,h3,h4,h5 {
     margin-left: 20px;
 }
 
+/*Listed Items*/
+.list-group-item-text {
+    color: #b60a0a;
+}
+
 /*Tabs*/
 .nav-tabs {
     clear: left;
-}
-
-#view {
-    display: none;
 }
 /*Map Styling*/
 /*Responsive*/
@@ -107,6 +108,11 @@ p,label,h1,h2,h3,h4,h5 {
 }
 
 #map-canvas {
+    height:250px;
+    width:100%;
+}
+
+#map-item {
     height:250px;
     width:100%;
 }
