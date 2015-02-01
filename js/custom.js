@@ -18,23 +18,23 @@ function geolocationSuccess(position) {
     //map positions
     var lat = position.coords.latitude;
     var long = position.coords.longitude;
-    
+
     //output latitude and longitude into hidden text fields
-   	sendLatLong(lat, long);
-    
+   	//sendLatLong(lat, long);
+
     //get center coordinates
     var userLatLng = new google.maps.LatLng(lat, long);
-    
+
     //Map Options
     var myOptions = {
         zoom : 16,
         center : userLatLng,
         mapTypeId : google.maps.MapTypeId.ROADMAP
     };
-    
-    // Draw the map    
+
+    // Draw the map
     mapObject = new google.maps.Map(document.getElementById("map-canvas"), myOptions);
-    
+
     // Create the marker for the user's position
     var uMarker = new google.maps.Marker({
         position: userLatLng,
@@ -47,8 +47,8 @@ function geolocationSuccess(position) {
 
 //output latitude and longitude into hidden text fields
 function sendLatLong(lat,long){
-    document.getElementById("latitude").value = lat;
-    document.getElementById("longitude").value = long;
+    //document.getElementById("latitude").value = lat;
+    //document.getElementById("longitude").value = long;
 }
 
 //error for geolocation
@@ -74,7 +74,7 @@ function geolocateUser() {
 
 //start of jquery code
 $(document).ready(function(){
-	
+
 	//do not display message box
 	$("#message-box").css('display', 'none', 'important');
 
@@ -101,11 +101,11 @@ $(document).ready(function(){
 				data: dataString,
 				cache: false,
 				success: function(result){
-					
+
 						$("#message-box").css('display', 'inline', 'important');
 						$("#message-box").html('<p class="alert alert-success">Information saved successfully</p>');
 				},
-				error: function() {	
+				error: function() {
 						$("#message-box").css('display', 'inline', 'important');
 						$("#message-box").html('<p class="alert alert-danger">There was a problem saving the information! Try again!</p>');
 				}
@@ -113,5 +113,37 @@ $(document).ready(function(){
 		}
 		return false;
 	});
-
+	
+	  //$("#login-err").css('display', 'none', 'important');
+  
+  //log in function
+  $('#login-btn').click(function(e) {
+    var username = $('#username').val();
+    var password = $('#password').val();
+	
+	if ((username == "")||(password == "")) {
+		$("#login-err").css('display', 'block', 'important');
+		$("#login-err").addClass("alert-danger");
+		$("#login-err").html("Please enter both user name and password");
+		$('#username').val("");
+		$('#password').val("");
+		e.preventDefault();
+		
+	} else {
+		//var loginParameters = 'user_name=' + username + '&password=' + password;
+		$.post("loginprocess.php",$("#user-reg-form").serialize(),
+			function(data){
+				if(data=='true') {
+					window.location = "measurements.php";
+				} else {
+					$("#login-err").css('display', 'block', 'important');
+					$("#login-err").addClass("alert-danger");
+					$("#login-err").html("Wrong user name or password");
+					$('#username').val("");
+					$('#password').val("");
+				}
+			});
+		e.preventDefault();
+	}
+  });
 });

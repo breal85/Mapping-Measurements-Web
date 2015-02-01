@@ -9,7 +9,7 @@
 		//check if post array is empty
       	$post = (!empty($_POST)) ? true : false;
 
-      	//if post array is not empty execute  
+      	//if post array is not empty execute
       	if($post) {
 	        //create POST array to collect data from the user registration form
 	        //confirm first whether the data has been set before assigning it a variable
@@ -40,20 +40,20 @@
 	    	$num = mysql_num_rows($result);
 
 	    	$i=0;
-	    	
+
 	    	while ($i < $num) {
 	    		//CODE$i++;
 	    	}
 
 	    	if (!$result) {
-				$unsucess_url = 'http://' . $_SERVER['HTTP_HOST'] . dirname($_SERVER['PHP_SELF']) . '/includes/unsuccessful.php';
+				$unsucess_url = 'http://' . $_SERVER['HTTP_HOST'] . dirname($_SERVER['PHP_SELF']) . '/unsuccessful.php';
 				header('Location: ' . $unsucess_url);
             }
             else {
-				$sucess_url = 'http://' . $_SERVER['HTTP_HOST'] . dirname($_SERVER['PHP_SELF']) . '/includes/success.php';
+				$sucess_url = 'http://' . $_SERVER['HTTP_HOST'] . dirname($_SERVER['PHP_SELF']) . '/success.php';
 				header('Location: ' . $sucess_url);
 			}
-                       
+
            //close database server connection
            mysql_close($connect);
     	}
